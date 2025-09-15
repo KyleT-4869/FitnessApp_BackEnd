@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS Member (
+    id varchar(255) NOT NULL PRIMARY KEY,
+    name varchar(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Login (
+    id varchar(255) NOT NULL REFERENCES Member(id),
+    username varchar(255) NOT NULL,
+    hash int NOT NULL
+);
