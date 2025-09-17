@@ -5,9 +5,10 @@ import Group5.FitnessApp.model.Member;
 import Group5.FitnessApp.repository.LoginRepository;
 import Group5.FitnessApp.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LoginController {
@@ -18,19 +19,28 @@ public class LoginController {
     @Autowired
     MemberRepository memRepo;
 
-    @GetMapping("/login")
-    public boolean logIn() {
-        Login log = new Login();
+    @Autowired
+    JdbcAggregateTemplate template;
+
+    public LoginController(LoginRepository logRepo, MemberRepository memRepo, JdbcAggregateTemplate template) {
+        this.logRepo = logRepo;
+        this.memRepo = memRepo;
+        this.template = template;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Member> logIn(@RequestBody Login log) {
         Login logCheck = retrieveLog(log);
         if(logCheck == null) {
-            return false;
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         else {
             if(!authorizePassword(log,logCheck)) {
-                return false;
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
-        return true;
+        Member member = memRepo.findById(logCheck.getId()).get();
+        return ResponseEntity.ok(member);
     }
 
     public Login retrieveLog(Login log) {
@@ -43,32 +53,29 @@ public class LoginController {
     }
 
     public boolean authorizePassword(Login log, Login logCheck) {
-        if(log.getHash() == logCheck.getHash()) {
+        if(log.getHash() == logCheck.getHash2()) {
             return true;
         }
         return false;
     }
 
-    @GetMapping("/signup")
-    public boolean signUp() {
-        // Need to figure out a way to get inputs from JSON
-        Member member = new Member();
-        memRepo.save(member);
-        return true;
+    @PostMapping("/signup")
+    public ResponseEntity<Member> signUp(@RequestBody Member member) {
+        template.insert(member);
+        return ResponseEntity.ok(member);
     }
-    @GetMapping("/createlogin")
-    public boolean createLogin() {
-        // Need to find a way to pass JSON files and read it into the variables
-        Login log = new Login();
+    @PostMapping("/createlogin")
+    public ResponseEntity<String> createLogin(@RequestBody Login log) {
         if(!checkUsername(log)){
-            System.out.println("Username already exist");
-            return false;
+            System.out.println();
+            return new ResponseEntity<>("Username already exist",HttpStatus.BAD_REQUEST);
         }
         if(!checkPassword(log)) {
-            return false;
+            return new ResponseEntity<>("Your password does not meet our requirements", HttpStatus.BAD_REQUEST);
         }
-        logRepo.save(log);
-        return true;
+        Login secureLog = new Login(log.getUsername(), log.getId(), log.getHash());
+        template.insert(secureLog);
+        return ResponseEntity.ok("Sign in created");
     }
 
     public boolean checkUsername(Login log) {

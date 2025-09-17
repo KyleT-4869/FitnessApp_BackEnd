@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS Member (
 CREATE TABLE IF NOT EXISTS Login (
     id varchar(255) NOT NULL REFERENCES Member(id),
     username varchar(255) NOT NULL,
-    hash int NOT NULL
+    password_hash int NOT NULL
 );
