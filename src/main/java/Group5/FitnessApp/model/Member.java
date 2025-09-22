@@ -8,7 +8,6 @@ public class Member {
     @Id
     private String id;
     private String name;
-    //private AggregateReference<>
 
     public Member() {}
 
