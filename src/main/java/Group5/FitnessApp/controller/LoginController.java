@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("/api")
 @RestController
 public class LoginController {
 
@@ -70,8 +71,11 @@ public class LoginController {
             System.out.println();
             return new ResponseEntity<>("Username already exist",HttpStatus.BAD_REQUEST);
         }
-        if(!checkPassword(log)) {
-            return new ResponseEntity<>("Your password does not meet our requirements", HttpStatus.BAD_REQUEST);
+        if(log.getPassword().length() < 12) {
+            return new ResponseEntity<>("Your password needs to be at least 12 characters long", HttpStatus.BAD_REQUEST);
+        }
+        if(!checkSpecialChar(log)) {
+            return new ResponseEntity<>("You need at least 1 special character in your password", HttpStatus.BAD_REQUEST);
         }
         Login secureLog = new Login(log.getUsername(), log.getId(), log.getHash());
         template.insert(secureLog);
@@ -80,18 +84,6 @@ public class LoginController {
 
     public boolean checkUsername(Login log) {
         if(logRepo.existsById(log.getUsername())) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean checkPassword(Login log) {
-        if(log.getPassword().length() < 12) {
-            System.out.println("You password needs to be at least 12 characters long");
-            return false;
-        }
-        if(!checkSpecialChar(log)) {
-            System.out.println("You need at least one special character in your password");
             return false;
         }
         return true;
