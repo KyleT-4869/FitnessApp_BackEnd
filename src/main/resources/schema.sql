@@ -6,6 +6,9 @@ CREATE TABLE IF NOT EXISTS Login (
 
 CREATE TABLE IF NOT EXISTS Member (
     id varchar(255) NOT NULL REFERENCES Login(id),
-    name varchar(255) NOT NULL
+    name varchar(255) NOT NULL,
+    height double NOT NULL,
+    weight double NOT NULL,
+    sex varchar(255) NOT NULL
 );
 
