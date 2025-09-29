@@ -1,6 +1,6 @@
 package Group5.FitnessApp.service;
 
-
+import java.util.Random;
 import Group5.FitnessApp.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -22,8 +22,13 @@ public class PasswordResetService {
         mail.setTo(member.getId());
         mail.setFrom("group5.comp490@gmail.com");
         mail.setSubject("Recovery code for account");
-        mail.setText("Random number");
+        mail.setText("Your account recovery code is " + generateCode());
 
         javaMailSender.send(mail);
+    }
+
+    public int generateCode() {
+        Random rand = new Random();
+        return rand.nextInt((2000000 - 1000000) + 1) + 1000000;
     }
 }
