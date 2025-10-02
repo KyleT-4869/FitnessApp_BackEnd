@@ -17,14 +17,16 @@ public class PasswordResetService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendRecoveryCode(Member member) {
+    public int sendRecoveryCode(String email) {
         SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(member.getId());
+        mail.setTo(email);
         mail.setFrom("group5.comp490@gmail.com");
         mail.setSubject("Recovery code for account");
-        mail.setText("Your account recovery code is " + generateCode());
+        int recoveryCode = generateCode();
+        mail.setText("Your account recovery code is " + recoveryCode);
 
         javaMailSender.send(mail);
+        return recoveryCode;
     }
 
     public int generateCode() {

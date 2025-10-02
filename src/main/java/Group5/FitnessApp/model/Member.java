@@ -14,6 +14,10 @@ public class Member {
 
     public Member() {}
 
+    public Member(String id) {
+        this.id = id;
+    }
+
     public Member(String id, String name, double height, double weight,String sex) {
         this.id = id;
         this.name = name;
