@@ -30,9 +30,9 @@ public class LoginController {
     }
 
     @PostMapping("/sendCode")
-    public ResponseEntity<Integer> sendRecoveryCode(@RequestBody String email) {
-        if(memRepo.existsById(email)) {
-            int returnCode = passwordReset.sendRecoveryCode(email);
+    public ResponseEntity<Integer> sendRecoveryCode(@RequestBody Member member) {
+        if(memRepo.existsById(member.getId())) {
+            int returnCode = passwordReset.sendRecoveryCode(member.getId());
             return ResponseEntity.ok(returnCode);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -41,7 +41,7 @@ public class LoginController {
     @PostMapping("/changePassword")
     public ResponseEntity<String> changePassword(@RequestBody Login log) {
         int rows = SQLTemplate.update(
-                "UPDATE Login SET password_hash = ? WHERE email = ?",
+                "UPDATE Login SET password_hash = ? WHERE id = ?",
                 log.getHash(), log.getId()
         );
         if(rows == 0) {
