@@ -1,19 +1,19 @@
 package Group5.FitnessApp.service;
 
 import java.util.Random;
-import Group5.FitnessApp.model.Member;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PasswordResetService {
+public class AccountRecoveryService {
 
     @Autowired
     JavaMailSender javaMailSender;
 
-    public PasswordResetService(JavaMailSender javaMailSender) {
+    public AccountRecoveryService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 

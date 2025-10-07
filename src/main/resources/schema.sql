@@ -14,3 +14,12 @@ CREATE TABLE IF NOT EXISTS Member (
 
 INSERT INTO Login (id, username, password_hash) VALUES ('kyletruong2000@gmail.com', 'KT-243', -1941214078);
 INSERT INTO Member(id, name, height, weight, sex) VALUES ('kyletruong2000@gmail.com', 'Kyle Truong', 5.9, 145.5, 'male');
+
+INSERT INTO Login(id, username, password_hash) VALUES ('itzcoatlsun@gmail.com','itzcoatl262', 1549419726);
+INSERT INTO Member(id, name, height, weight, sex) VALUES ('itzcoatlsun@gmail.com','Izzy Tellez', 6.0, 185, 'male');
+
+INSERT INTO Login(id, username, password_hash) VALUES ('brandonhcontreras@gmail.com', 'niv0id2004', -2038099704);
+INSERT INTO Member(id, name, height, weight, sex) VALUES('brandonhcontreras@gmail.com', 'Brandon Contreras', 5.8, 165.0, 'male');
+
+INSERT INTO Login(id, username, password_hash) VALUES ('vchavez8500@gmail.com', 'vmchavez00', 1843501453);
+INSERT INTO Member(id, name, height, weight, sex) VALUES ('vchavez8500@gmail.com', 'Valerie Chavez', 5.1, 110, 'female');

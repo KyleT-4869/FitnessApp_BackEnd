@@ -4,7 +4,7 @@ import Group5.FitnessApp.model.Login;
 import Group5.FitnessApp.model.Member;
 import Group5.FitnessApp.repository.LoginRepository;
 import Group5.FitnessApp.repository.MemberRepository;
-import Group5.FitnessApp.service.PasswordResetService;
+import Group5.FitnessApp.service.AccountRecoveryService;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,10 @@ public class LoginController {
     LoginRepository logRepo;
     MemberRepository memRepo;
     JdbcAggregateTemplate template;
-    PasswordResetService passwordReset;
+    AccountRecoveryService passwordReset;
     JdbcTemplate SQLTemplate;
 
-    public LoginController(LoginRepository logRepo, MemberRepository memRepo, JdbcAggregateTemplate template, PasswordResetService passwordReset, JdbcTemplate SQLTemplate) {
+    public LoginController(LoginRepository logRepo, MemberRepository memRepo, JdbcAggregateTemplate template, AccountRecoveryService passwordReset, JdbcTemplate SQLTemplate) {
         this.logRepo = logRepo;
         this.memRepo = memRepo;
         this.template = template;
