@@ -21,5 +21,8 @@ INSERT INTO Member(id, name, height, weight, sex) VALUES ('itzcoatlsun@gmail.com
 INSERT INTO Login(id, username, password_hash) VALUES ('brandonhcontreras@gmail.com', 'niv0id2004', -2038099704);
 INSERT INTO Member(id, name, height, weight, sex) VALUES('brandonhcontreras@gmail.com', 'Brandon Contreras', 5.8, 165.0, 'male');
 
-INSERT INTO Login(id, username, password_hash) VALUES ('vchavez8500@gmail.com', 'vmchavez00', 1843501453);
-INSERT INTO Member(id, name, height, weight, sex) VALUES ('vchavez8500@gmail.com', 'Valerie Chavez', 5.1, 110, 'female');
+INSERT INTO Login(id, username, password_hash) VALUES ('Vchavez8500@gmail.com', 'vmchavez00', 1843501453);
+INSERT INTO Member(id, name, height, weight, sex) VALUES ('Vchavez8500@gmail.com', 'Valerie Chavez', 5.1, 110, 'female');
+
+INSERT INTO Login(id, username, password_hash) VALUES ('maliyaleann@gmail.com', 'mc2003', -1757133414);
+INSERT INTO Member(id, name, height, weight, sex) VALUES('maliyaleann@gmail.com', 'Maliya Cockrell', 5.3, 113, 'female');
