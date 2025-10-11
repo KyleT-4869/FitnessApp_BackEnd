@@ -4,31 +4,52 @@ import Group5.FitnessApp.model.Login;
 import Group5.FitnessApp.model.Member;
 import Group5.FitnessApp.repository.LoginRepository;
 import Group5.FitnessApp.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import Group5.FitnessApp.service.AccountRecoveryService;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
 @RestController
 public class LoginController {
 
-    @Autowired
     LoginRepository logRepo;
-
-    @Autowired
     MemberRepository memRepo;
-
-    @Autowired
     JdbcAggregateTemplate template;
+    AccountRecoveryService passwordReset;
+    JdbcTemplate SQLTemplate;
 
-    public LoginController(LoginRepository logRepo, MemberRepository memRepo, JdbcAggregateTemplate template) {
+    public LoginController(LoginRepository logRepo, MemberRepository memRepo, JdbcAggregateTemplate template, AccountRecoveryService passwordReset, JdbcTemplate SQLTemplate) {
         this.logRepo = logRepo;
         this.memRepo = memRepo;
         this.template = template;
+        this.passwordReset = passwordReset;
+        this.SQLTemplate = SQLTemplate;
     }
 
+    @PostMapping("/sendCode")
+    public ResponseEntity<Integer> sendRecoveryCode(@RequestBody Member member) {
+        if(memRepo.existsById(member.getId())) {
+            int returnCode = passwordReset.sendRecoveryCode(member.getId());
+            return ResponseEntity.ok(returnCode);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestBody Login log) {
+        int rows = SQLTemplate.update(
+                "UPDATE Login SET password_hash = ? WHERE id = ?",
+                log.getHash(), log.getId()
+        );
+        if(rows == 0) {
+            return new ResponseEntity<>("Unable to change password", HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok("Your password has been changed");
+    }
+    
     @PostMapping("/login")
     public ResponseEntity<Member> logIn(@RequestBody Login log) {
         Login logCheck = retrieveLog(log);

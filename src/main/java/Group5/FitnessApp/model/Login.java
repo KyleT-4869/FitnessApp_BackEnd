@@ -46,7 +46,7 @@ public class Login {
         return username;
     }
 
-    public void setUserame(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
