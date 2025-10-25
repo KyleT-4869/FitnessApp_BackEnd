@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Login (
     id varchar(255) NOT NULL PRIMARY KEY,
-    username varchar(255) NOT NULL,
+    username varchar(255) NOT NULL UNIQUE,
     password_hash int NOT NULL
 );
 
@@ -10,6 +10,14 @@ CREATE TABLE IF NOT EXISTS Member (
     height double NOT NULL,
     weight double NOT NULL,
     sex varchar(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Post (
+    ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    AUTHOR_ID varchar(255) NOT NULL REFERENCES Login(username),
+    LIKES int NOT NULL,
+    DISLIKES int NOT NULL,
+    COMMENTS int NOT NULL
 );
 
 INSERT INTO Login (id, username, password_hash) VALUES ('kyletruong2000@gmail.com', 'KT-243', -1941214078);
