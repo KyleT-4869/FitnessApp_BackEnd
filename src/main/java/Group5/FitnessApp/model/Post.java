@@ -8,10 +8,11 @@ public class Post {
     @Id
     long id;
     String authorID;
+    String content;
     int likes;
     int dislikes;
     int comments;
-    public Post(String authorID, int likes, int dislikes, int comments) {
+    public Post(String authorID, int likes, int dislikes, int comments, String content) {
         this.authorID = authorID;
         this.likes = likes;
         this.dislikes = dislikes;
@@ -47,5 +48,12 @@ public class Post {
     }
     public int getComments() {
         return this.comments;
+    }
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
