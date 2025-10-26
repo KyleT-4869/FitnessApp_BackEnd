@@ -7,24 +7,34 @@ public class Post {
 
     @Id
     long id;
-    String authorID;
+    String authorId;
     String content;
     int likes;
     int dislikes;
     int comments;
-    public Post(String authorID, int likes, int dislikes, int comments, String content) {
-        this.authorID = authorID;
+
+    public Post() {
+
+    }
+
+    public Post(String authorId, int likes, int dislikes, int comments, String content) {
+        this.authorId = authorId;
         this.likes = likes;
         this.dislikes = dislikes;
         this.comments = comments;
     }
-
-    public void setAuthor(String author) {
-        this.authorID = author;
+    public void setId(long id) {
+        this.id = id;
+    }
+    public long getId() {
+        return this.id;
+    }
+    public void setAuthorId(String author) {
+        this.authorId = author;
     }
 
-    public String getAuthor() {
-        return this.authorID;
+    public String getAuthorId() {
+        return this.authorId;
     }
 
     public void setLikes(int likes) {

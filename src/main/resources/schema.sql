@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Member (
     sex varchar(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Post (
+CREATE TABLE IF NOT EXISTS POST (
     ID BIGINT AUTO_INCREMENT PRIMARY KEY,
     AUTHOR_ID varchar(255) NOT NULL REFERENCES Login(username),
     CONTENT varchar(1000) NOT NULL,
@@ -43,3 +43,9 @@ INSERT INTO Member(id, name, height, weight, sex) VALUES ('vchavez8500@gmail.com
 
 INSERT INTO Login(id, username, password_hash) VALUES ('maliyaleann@gmail.com', 'mc2003', -1757133414);
 INSERT INTO Member(id, name, height, weight, sex) VALUES('maliyaleann@gmail.com', 'Maliya Cockrell', 5.3, 113, 'female');
+
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'I hate minorities', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('vmchavez00','repeal the 19th', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'They need to go back', '0','0','0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('vmchavez00', 'women deserve less', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'go back to the kitchen', '0', '0', '0');

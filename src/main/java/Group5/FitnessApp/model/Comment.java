@@ -11,6 +11,10 @@ public class Comment {
     int likes;
     int dislikes;
 
+    public Comment() {
+
+    }
+
     public Comment(long postId, String content, int likes, int dislikes) {
         this.postId = postId;
         this.content = content;
