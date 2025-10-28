@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS POST (
 CREATE TABLE IF NOT EXISTS COMMENT (
     ID BIGINT AUTO_INCREMENT PRIMARY KEY,
     POST_ID BIGINT NOT NULL REFERENCES Post(ID),
+    AUTHOR_ID varchar(255) NOT NULL REFERENCES login(username),
     CONTENT varchar(1000) NOT NULL,
     LIKES int NOT NULL,
     DISLIKES int NOT NULL
@@ -44,8 +45,11 @@ INSERT INTO Member(id, name, height, weight, sex) VALUES ('vchavez8500@gmail.com
 INSERT INTO Login(id, username, password_hash) VALUES ('maliyaleann@gmail.com', 'mc2003', -1757133414);
 INSERT INTO Member(id, name, height, weight, sex) VALUES('maliyaleann@gmail.com', 'Maliya Cockrell', 5.3, 113, 'female');
 
-INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'I hate minorities', '0', '0', '0');
-INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('vmchavez00','repeal the 19th', '0', '0', '0');
-INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'They need to go back', '0','0','0');
-INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('vmchavez00', 'women deserve less', '0', '0', '0');
-INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'go back to the kitchen', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'Marvel Rivals is so fun', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('vmchavez00','Best Buy is the best place to work for', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'Thank god I listened to Kyle and bought Yakuza 0, it is the best game ever', '0','0','0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('vmchavez00', 'I wish I didnt buy a mac', '0', '0', '0');
+INSERT INTO POST(AUTHOR_ID, CONTENT, LIKES, DISLIKES, COMMENTS) VALUES('mc2003', 'AI can draw better than me', '0', '0', '0');
+
+INSERT INTO COMMENT(POST_ID, AUTHOR_ID, CONTENT, LIKES, DISLIKES) VALUES('3','vmchavez00', 'Yeah Kyle always know best', '0', '0');
+INSERT INTO COMMENT(POST_ID, AUTHOR_ID, CONTENT, LIKES, DISLIKES) VALUES('3', 'itzcoatl262', 'Glad you listened to him', '0', '0');

@@ -7,23 +7,29 @@ public class Comment {
     @Id
     long id;
     long postId;
+    String authorId;
     String content;
     int likes;
     int dislikes;
 
-    public Comment() {
+    public Comment() {}
 
-    }
-
-    public Comment(long postId, String content, int likes, int dislikes) {
+    public Comment(long postId, String content, int likes, int dislikes, String authorId ) {
         this.postId = postId;
         this.content = content;
         this.likes = likes;
         this.dislikes = dislikes;
+        this.authorId = authorId;
     }
-
+    public void setId(long Id) {
+        this.id = id;
+    }
     public void setPostId(long postId) {
         this.postId = postId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public void setContent(String content) {
@@ -38,10 +44,16 @@ public class Comment {
         this.dislikes = dislikes;
     }
 
+    public long getId() {
+        return this.id;
+    }
     public long getPostId() {
         return this.postId;
     }
 
+    public String getAuthorId() {
+        return this.authorId;
+    }
     public String getContent() {
         return this.content;
     }

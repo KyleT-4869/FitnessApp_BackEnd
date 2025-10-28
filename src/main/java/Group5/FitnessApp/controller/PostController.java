@@ -30,8 +30,9 @@ public class PostController {
 
     @PostMapping("/makePost")
     public ResponseEntity<Post> makePost(@RequestBody Post post) {
+
         long id = postService.makePost(post);
-        if(id !=  0) {
+        if(id != 0) {
             post.setId(id);
             return ResponseEntity.ok(post);
         }
