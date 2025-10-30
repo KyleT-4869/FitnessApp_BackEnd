@@ -38,4 +38,12 @@ public class PostController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @PostMapping("/deletePost")
+    public ResponseEntity<String> deletePost(@RequestParam String id) {
+        if(postService.deletePost(id)) {
+            return ResponseEntity.ok("This post has been deleted");
+        }
+        return new ResponseEntity<>("Unable to delete post", HttpStatus.BAD_REQUEST);
+    }
 }

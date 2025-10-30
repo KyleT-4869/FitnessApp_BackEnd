@@ -86,6 +86,7 @@ public class LoginController {
         template.insert(member);
         return ResponseEntity.ok(member);
     }
+
     @PostMapping("/createlogin")
     public ResponseEntity<String> createLogin(@RequestBody Login log) {
         if(!checkUsername(log)){

@@ -28,7 +28,7 @@ public class Login {
         this.id = id;
     }
 
-    public Login(String username, String id,int password_hash) {
+    public Login(String username, String id, int password_hash) {
         this.username = username;
         this.id = id;
         this.password_hash = password_hash;

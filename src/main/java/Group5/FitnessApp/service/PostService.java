@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.String.valueOf;
+
 @Service
 public class PostService {
 
@@ -38,7 +40,6 @@ public class PostService {
         return returnPosts;
     }
 
-
     public long makePost(Post post) {
         jdbcTemplate.update(
                 "INSERT INTO POST(author_id, content, likes, dislikes, comments) VALUES (?,?,?,?,?)",
@@ -53,6 +54,16 @@ public class PostService {
             return postCheck.getId();
         }
         return 0;
+    }
+
+    public boolean deletePost(String id) {
+        try {
+            postRepo.deleteById(id);
+        }
+        catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     public Post findByContent(Post post) {
