@@ -35,4 +35,12 @@ public class CommentController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @PostMapping("/deleteComment")
+    public ResponseEntity<String> deleteComment(@RequestParam String id) {
+        if(commentService.deleteComment(id)) {
+            return ResponseEntity.ok("Your comment has been deleted");
+        }
+        return new ResponseEntity<>("Unable to delete comment", HttpStatus.BAD_REQUEST);
+    }
 }

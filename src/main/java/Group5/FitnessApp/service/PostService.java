@@ -60,7 +60,7 @@ public class PostService {
         try {
             postRepo.deleteById(id);
         }
-        catch (IllegalArgumentException e) {
+        catch (Exception e) {
             return false;
         }
         return true;

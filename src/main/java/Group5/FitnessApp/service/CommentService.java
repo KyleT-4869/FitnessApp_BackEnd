@@ -48,4 +48,14 @@ public class CommentService {
         return status;
     }
 
+    public boolean deleteComment(String id) {
+        try {
+            commentRepo.deleteById(id);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
 }
