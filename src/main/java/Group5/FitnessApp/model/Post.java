@@ -10,17 +10,15 @@ public class Post {
     String authorId;
     String content;
     int likes;
-    int dislikes;
     int comments;
 
     public Post() {
 
     }
 
-    public Post(String authorId, int likes, int dislikes, int comments, String content) {
+    public Post(String authorId, int likes, int comments, String content) {
         this.authorId = authorId;
         this.likes = likes;
-        this.dislikes = dislikes;
         this.comments = comments;
     }
     public void setId(long id) {
@@ -43,14 +41,6 @@ public class Post {
 
     public int getLikes() {
         return this.likes;
-    }
-
-    public void setDislikes(int dislikes) {
-        this.dislikes = dislikes;
-    }
-
-    public int getDislikes() {
-        return this.dislikes;
     }
 
     public void setComments(int comments) {

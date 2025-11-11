@@ -10,15 +10,13 @@ public class Comment {
     String authorId;
     String content;
     int likes;
-    int dislikes;
 
     public Comment() {}
 
-    public Comment(long postId, String content, int likes, int dislikes, String authorId ) {
+    public Comment(long postId, String content, int likes, String authorId ) {
         this.postId = postId;
         this.content = content;
         this.likes = likes;
-        this.dislikes = dislikes;
         this.authorId = authorId;
     }
     public void setId(long Id) {
@@ -40,9 +38,6 @@ public class Comment {
         this.likes = likes;
     }
 
-    public void setDislikes(int dislikes) {
-        this.dislikes = dislikes;
-    }
 
     public long getId() {
         return this.id;
@@ -62,7 +57,4 @@ public class Comment {
         return this.likes;
     }
 
-    public int getDislikes() {
-        return this.dislikes;
-    }
 }

@@ -12,6 +12,7 @@ public class Member {
     double height;
     double weight;
     String sex;
+    String description;
 
     public Member() {}
 
@@ -19,13 +20,14 @@ public class Member {
         this.id = id;
     }
 
-    public Member(String id, String name, double height, double weight, String sex, String username) {
+    public Member(String id, String name, double height, double weight, String sex, String username, String description) {
         this.id = id;
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.sex = sex;
         this.username = username;
+        this.description = description;
     }
     public void setId(String id) {
         this.id = id;
@@ -42,6 +44,13 @@ public class Member {
     }
     public String getId() {
         return this.id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getDescription() {
+        return this.description;
     }
 
     public String getName() {

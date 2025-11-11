@@ -33,7 +33,6 @@ public class PostService {
             p.setAuthorId(rs.getString("AUTHOR_ID"));
             p.setContent(rs.getString("CONTENT"));
             p.setLikes(rs.getInt("LIKES"));
-            p.setDislikes(rs.getInt("DISLIKES"));
             p.setComments(rs.getInt("COMMENTS"));
             return p;
         });
@@ -42,11 +41,10 @@ public class PostService {
 
     public long makePost(Post post) {
         jdbcTemplate.update(
-                "INSERT INTO POST(author_id, content, likes, dislikes, comments) VALUES (?,?,?,?,?)",
+                "INSERT INTO POST(author_id, content, likes, comments) VALUES (?,?,?,?)",
                 post.getAuthorId(),
                 post.getContent(),
                 post.getLikes(),
-                post.getDislikes(),
                 post.getComments()
         );
         Post postCheck = findByContent(post);

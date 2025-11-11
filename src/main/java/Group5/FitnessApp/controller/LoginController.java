@@ -29,6 +29,16 @@ public class LoginController {
         this.SQLTemplate = SQLTemplate;
     }
 
+    @PostMapping("/changeProfile")
+    public ResponseEntity<String> changeProfile(@RequestBody Member member) {
+        int rows = SQLTemplate.update("UPDATE MEMBER SET NAME = ?, DESCRIPTION = ? WHERE ID = ?",
+                    member.getName(), member.getDescription(), member.getId());
+        if(rows == 0) {
+            return new ResponseEntity<>("Unable to change profile information", HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok("Your profile information has been changed");
+    }
+
     @PostMapping("/sendCode")
     public ResponseEntity<Integer> sendRecoveryCode(@RequestBody Member member) {
         if(memRepo.existsById(member.getId())) {
@@ -41,7 +51,7 @@ public class LoginController {
     @PostMapping("/changePassword")
     public ResponseEntity<String> changePassword(@RequestBody Login log) {
         int rows = SQLTemplate.update(
-                "UPDATE Login SET password_hash = ? WHERE id = ?",
+                "UPDATE LOGIN SET password_hash = ? WHERE id = ?",
                 log.getHash(), log.getId()
         );
         if(rows == 0) {

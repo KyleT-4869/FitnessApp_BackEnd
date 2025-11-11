@@ -30,7 +30,6 @@ public class CommentService {
             c.setAuthorId(rs.getString("AUTHOR_ID"));
             c.setContent(rs.getString("CONTENT"));
             c.setLikes(rs.getInt("LIKES"));
-            c.setDislikes(rs.getInt("DISLIKES"));
             return c;
         }, post.getId());
 
@@ -38,12 +37,11 @@ public class CommentService {
     }
 
     public int makeComment(Comment comment) {
-        int status = jdbcTemplate.update("INSERT INTO COMMENT(post_id, author_id, content, likes, dislikes) VALUES (?,?,?,?,?)",
+        int status = jdbcTemplate.update("INSERT INTO COMMENT(post_id, author_id, content, likes) VALUES (?,?,?,?)",
                 comment.getPostId(),
                 comment.getAuthorId(),
                 comment.getContent(),
-                comment.getLikes(),
-                comment.getDislikes());
+                comment.getLikes());
 
         return status;
     }
