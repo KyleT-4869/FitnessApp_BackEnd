@@ -40,7 +40,9 @@ public class LoginController {
     }
 
     @PostMapping("/sendCode")
-    public ResponseEntity<Integer> sendRecoveryCode(@RequestBody Member member) {
+    public ResponseEntity<Integer> sendRecoveryCode(@RequestParam String id) {
+        Member member = new Member();
+        member.setId(id);
         if(memRepo.existsById(member.getId())) {
             int returnCode = passwordReset.sendRecoveryCode(member.getId());
             return ResponseEntity.ok(returnCode);
