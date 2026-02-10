@@ -2,31 +2,32 @@ package Group5.FitnessApp.model;
 
 import org.springframework.data.annotation.Id;
 
-
 public class Post {
 
     @Id
-    long id;
-    String authorId;
-    String content;
-    int likes;
-    int comments;
+    private long id;
+    private String authorId;
+    private String content;
+    private int likes;
+    private int comments;
 
-    public Post() {
-
-    }
+    public Post() {}
 
     public Post(String authorId, int likes, int comments, String content) {
         this.authorId = authorId;
         this.likes = likes;
         this.comments = comments;
+        this.content = content;
     }
+
     public void setId(long id) {
         this.id = id;
     }
+
     public long getId() {
         return this.id;
     }
+
     public void setAuthorId(String author) {
         this.authorId = author;
     }
@@ -46,9 +47,11 @@ public class Post {
     public void setComments(int comments) {
         this.comments = comments;
     }
+
     public int getComments() {
         return this.comments;
     }
+
     public String getContent() {
         return content;
     }
@@ -57,3 +60,4 @@ public class Post {
         this.content = content;
     }
 }
+

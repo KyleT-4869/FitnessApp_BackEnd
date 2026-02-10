@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AccountRecoveryService {
 
     @Autowired
-    JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
     public AccountRecoveryService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -22,6 +22,7 @@ public class AccountRecoveryService {
         mail.setTo(email);
         mail.setFrom("group5.comp490@gmail.com");
         mail.setSubject("Recovery code for account");
+
         int recoveryCode = generateCode();
         mail.setText("Your account recovery code is " + recoveryCode);
 
@@ -31,6 +32,7 @@ public class AccountRecoveryService {
 
     public int generateCode() {
         Random rand = new Random();
-        return rand.nextInt((2000000 - 1000000) + 1) + 1000000;
+        return rand.nextInt((2_000_000 - 1_000_000) + 1) + 1_000_000;
     }
 }
+

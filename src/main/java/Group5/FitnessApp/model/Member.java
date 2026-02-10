@@ -9,10 +9,12 @@ public class Member {
     private String id;
     private String name;
     private String username;
-    double height;
-    double weight;
-    String sex;
-    String description;
+    private double height;
+    private double weight;
+    private String sex;
+    private String goals;
+    private String activity_level;
+    private int age;
 
     public Member() {}
 
@@ -20,21 +22,26 @@ public class Member {
         this.id = id;
     }
 
-    public Member(String id, String name, double height, double weight, String sex, String username, String description) {
+    public Member(String id, String name, double height, double weight, String sex, String username, String goals, String activity_level, int age) {
         this.id = id;
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.sex = sex;
         this.username = username;
-        this.description = description;
+        this.goals = goals;
+        this.activity_level = activity_level;
+        this.age = age;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -42,15 +49,17 @@ public class Member {
     public String getUsername() {
         return this.username;
     }
+
     public String getId() {
         return this.id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setGoals(String description) {
+        this.goals = description;
     }
-    public String getDescription() {
-        return this.description;
+
+    public String getGoals() {
+        return this.goals;
     }
 
     public String getName() {
@@ -80,4 +89,21 @@ public class Member {
     public void setHeight(double height) {
         this.height = height;
     }
+
+    public void setActivity_level(String activity_level) {
+        this.activity_level = activity_level;
+    }
+
+    public String getActivity_level() {
+        return this.activity_level;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
 }
+

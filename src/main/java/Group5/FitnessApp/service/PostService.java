@@ -7,17 +7,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import static java.lang.String.valueOf;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.String.valueOf;
+
 
 @Service
 public class PostService {
 
-    PostRepository postRepo;
-    JdbcTemplate jdbcTemplate;
+    private final PostRepository postRepo;
+    private final JdbcTemplate jdbcTemplate;
 
     public PostService(PostRepository postRepo, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -25,17 +26,21 @@ public class PostService {
     }
 
     public List<Post> getPosts() {
-
         List<Post> returnPosts = new ArrayList<>();
-        returnPosts = jdbcTemplate.query("SELECT * FROM POST ORDER BY ID DESC LIMIT 5", (rs, rowNum) -> {
-            Post p = new Post();
-            p.setId(rs.getInt("ID"));
-            p.setAuthorId(rs.getString("AUTHOR_ID"));
-            p.setContent(rs.getString("CONTENT"));
-            p.setLikes(rs.getInt("LIKES"));
-            p.setComments(rs.getInt("COMMENTS"));
-            return p;
-        });
+
+        returnPosts = jdbcTemplate.query(
+                "SELECT * FROM POST ORDER BY ID DESC LIMIT 5",
+                (rs, rowNum) -> {
+                    Post p = new Post();
+                    p.setId(rs.getInt("ID"));
+                    p.setAuthorId(rs.getString("AUTHOR_ID"));
+                    p.setContent(rs.getString("CONTENT"));
+                    p.setLikes(rs.getInt("LIKES"));
+                    p.setComments(rs.getInt("COMMENTS"));
+                    return p;
+                }
+        );
+
         return returnPosts;
     }
 
@@ -47,21 +52,22 @@ public class PostService {
                 post.getLikes(),
                 post.getComments()
         );
+
         Post postCheck = findByContent(post);
-        if(postCheck != null) {
+        if (postCheck != null) {
             return postCheck.getId();
         }
         return 0;
     }
 
     public boolean deletePost(String id) {
-        try {
+        if(postRepo.existsById(id)) {
             postRepo.deleteById(id);
+            return true;
         }
-        catch (Exception e) {
+        else {
             return false;
         }
-        return true;
     }
 
     public Post findByContent(Post post) {
@@ -72,9 +78,8 @@ public class PostService {
                     post.getContent(),
                     post.getAuthorId()
             );
-        } catch(EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
-
 }
