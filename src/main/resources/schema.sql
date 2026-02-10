@@ -38,6 +38,12 @@ CREATE TABLE IF NOT EXISTS CALORIES (
     TDEE DECIMAL(8,2)
 );
 
+CREATE TABLE IF NOT EXISTS CHALLENGES (
+    ID BIGINT PRIMARY KEY,
+    TYPE varchar(25) NOT NULL,
+    NAME varchar(255) NOT NULL
+);
+
 INSERT INTO Login (id, username, password_hash) VALUES ('kyletruong2000@gmail.com', 'KT-243', -1941214078);
 INSERT INTO Member(id, username, name, height, weight, sex) VALUES ('kyletruong2000@gmail.com','KT-243', 'Kyle Truong', 5.9, 145.5, 'male');
 
