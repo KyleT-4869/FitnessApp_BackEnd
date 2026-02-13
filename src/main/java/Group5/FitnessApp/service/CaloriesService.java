@@ -3,6 +3,7 @@ package Group5.FitnessApp.service;
 import Group5.FitnessApp.model.Calories;
 import Group5.FitnessApp.model.Member;
 import Group5.FitnessApp.repository.CaloriesRepository;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,9 +12,11 @@ import java.util.Optional;
 public class CaloriesService {
 
     private final CaloriesRepository calRepo;
+    private final JdbcAggregateTemplate template;
 
-    public CaloriesService(CaloriesRepository calRepo) {
+    public CaloriesService(CaloriesRepository calRepo, JdbcAggregateTemplate template) {
         this.calRepo = calRepo;
+        this.template = template;
     }
 
     public void calculateBMR(Member member) {
@@ -61,7 +64,7 @@ public class CaloriesService {
         cal.setBmr(bmr);
         cal.setTdee(tdee);
         cal.setUsername(username);
-        calRepo.save(cal);
+        template.insert(cal);
     }
 
     public Optional<Calories> retrieveCaloriesInfo(String username) { return calRepo.findById(username); }

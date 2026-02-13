@@ -6,6 +6,7 @@ import Group5.FitnessApp.repository.LoginRepository;
 import Group5.FitnessApp.repository.MemberRepository;
 import Group5.FitnessApp.service.AccountRecoveryService;
 import Group5.FitnessApp.service.CaloriesService;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -101,6 +102,14 @@ public class LoginController {
 
     @PostMapping("/signup")
     public ResponseEntity<Member> signUp(@RequestBody Member member) {
+        Runnable task = () -> {
+          try {
+              calService.calculateBMR(member);
+          } catch (Exception e) {
+              System.out.print(e.getMessage());
+          }
+        };
+        task.run();
         template.insert(member);
         return ResponseEntity.ok(member);
     }
@@ -110,12 +119,15 @@ public class LoginController {
         if (!checkUsername(log)) {
             return new ResponseEntity<>("Username already exist", HttpStatus.BAD_REQUEST);
         }
+        /*
         if (log.getPassword().length() < 12) {
             return new ResponseEntity<>("Your password needs to be at least 12 characters long", HttpStatus.BAD_REQUEST);
         }
         if (!checkSpecialChar(log)) {
             return new ResponseEntity<>("You need at least 1 special character in your password", HttpStatus.BAD_REQUEST);
         }
+
+         */
 
         Login secureLog = new Login(log.getUsername(), log.getId(), log.getHash());
         template.insert(secureLog);
