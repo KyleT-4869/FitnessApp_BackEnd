@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class CommentController {
 
-    CommentService commentService;
+    private final CommentService commentService;
 
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
@@ -27,10 +27,11 @@ public class CommentController {
         return ResponseEntity.ok(returnComments);
     }
 
-    @GetMapping("/makeComments")
+    @PostMapping("/makeComments")
     public ResponseEntity<Comment> makeComments(@RequestBody Comment comment) {
-        int status = commentService.makeComment(comment);
-        if(status > 0) {
+        long id = commentService.makeComment(comment);
+        if (id > 0) {
+            comment.setId(id);
             return ResponseEntity.ok(comment);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -38,9 +39,10 @@ public class CommentController {
 
     @PostMapping("/deleteComment")
     public ResponseEntity<String> deleteComment(@RequestParam String id) {
-        if(commentService.deleteComment(id)) {
+        if (commentService.deleteComment(id)) {
             return ResponseEntity.ok("Your comment has been deleted");
         }
         return new ResponseEntity<>("Unable to delete comment", HttpStatus.BAD_REQUEST);
     }
 }
+

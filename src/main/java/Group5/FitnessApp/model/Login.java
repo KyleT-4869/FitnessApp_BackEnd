@@ -6,15 +6,13 @@ import org.springframework.data.annotation.Transient;
 public class Login {
 
     @Id
-    String username;
-
-    String id;
+    private String username;
 
     @Transient
-    String password;
+    private String password;
 
-    int password_hash;
-
+    private String id;
+    private int password_hash;
     public Login() {}
 
     public Login(String username, String password) {
@@ -39,7 +37,6 @@ public class Login {
         this.password = password;
         this.id = id;
         this.password_hash = password_hash;
-
     }
 
     public String getUsername() {
@@ -69,8 +66,9 @@ public class Login {
     public int getHash() {
         return this.password.hashCode();
     }
+
     public int getHash2() {
         return this.password_hash;
     }
-
 }
+

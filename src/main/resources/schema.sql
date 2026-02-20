@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS Member (
     height double NOT NULL,
     weight double NOT NULL,
     sex varchar(255) NOT NULL,
-    description varchar(255)
+    goals varchar(255),
+    age BIGINT,
+    activity_level varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS POST (
@@ -30,10 +32,22 @@ CREATE TABLE IF NOT EXISTS COMMENT (
     LIKES int NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS CALORIES (
+    USERNAME varchar(255) PRIMARY KEY NOT NULL REFERENCES Login(username),
+    BMR DECIMAL(8,2),
+    TDEE DECIMAL(8,2)
+);
+
+CREATE TABLE IF NOT EXISTS CHALLENGES (
+    ID BIGINT PRIMARY KEY,
+    TYPE varchar(25) NOT NULL,
+    NAME varchar(255) NOT NULL
+);
+
 INSERT INTO Login (id, username, password_hash) VALUES ('kyletruong2000@gmail.com', 'KT-243', -1941214078);
 INSERT INTO Member(id, username, name, height, weight, sex) VALUES ('kyletruong2000@gmail.com','KT-243', 'Kyle Truong', 5.9, 145.5, 'male');
 
-INSERT INTO Login(id, username, password_hash) VALUES ('itzcoatlsun@gmail.com','itzcoatl262', 1549419726);
+INSERT INTO Login(id, username, password_hash) VALUES ('itzcoatlsun@gmail.com','itzcoatl262', -1653148926);
 INSERT INTO Member(id, username, name, height, weight, sex) VALUES ('itzcoatlsun@gmail.com','itzcoatl262','Izzy Tellez', 6.0, 185, 'male');
 
 INSERT INTO Login(id, username, password_hash) VALUES ('brandonhcontreras@gmail.com', 'niv0id2004', -2038099704);

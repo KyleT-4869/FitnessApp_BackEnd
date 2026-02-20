@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class PostController {
 
-    PostService postService;
+    private final PostService postService;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -21,18 +21,15 @@ public class PostController {
 
     @GetMapping("/getPosts")
     public ResponseEntity<List<Post>> getPosts() {
-
         List<Post> returnPosts = new ArrayList<>();
         returnPosts = postService.getPosts();
-
         return ResponseEntity.ok(returnPosts);
     }
 
     @PostMapping("/makePost")
     public ResponseEntity<Post> makePost(@RequestBody Post post) {
-
         long id = postService.makePost(post);
-        if(id != 0) {
+        if (id != 0) {
             post.setId(id);
             return ResponseEntity.ok(post);
         }
@@ -41,7 +38,7 @@ public class PostController {
 
     @PostMapping("/deletePost")
     public ResponseEntity<String> deletePost(@RequestParam String id) {
-        if(postService.deletePost(id)) {
+        if (postService.deletePost(id)) {
             return ResponseEntity.ok("This post has been deleted");
         }
         return new ResponseEntity<>("Unable to delete post", HttpStatus.BAD_REQUEST);
